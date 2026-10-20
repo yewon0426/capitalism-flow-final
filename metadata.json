@@ -1,0 +1,6 @@
+{
+  "name": "CAPITALISM FLOW — 고등학교 통합사회2 자본주의 수업용 인터랙티브 웹 교과서",
+  "description": "고등학교 통합사회2 교육과정에 맞춘 교사용 인터랙티브 경제 수업자료. 자본주의의 의미와 특징, 상업·산업·수정 자본주의에서 신자유주의로 이어지는 역사적 인과관계를 시각화합니다.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
