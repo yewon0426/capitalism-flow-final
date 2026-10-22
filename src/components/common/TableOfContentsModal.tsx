@@ -20,6 +20,7 @@ export const TableOfContentsModal: React.FC<TableOfContentsModalProps> = ({
   const part1Topics = CURRICULUM_TOPICS.filter((t) => t.partId === 'part1');
   const part2Topics = CURRICULUM_TOPICS.filter((t) => t.partId === 'part2');
   const part3Topics = CURRICULUM_TOPICS.filter((t) => t.partId === 'part3');
+  const part4Topics = CURRICULUM_TOPICS.filter((t) => t.partId === 'part4');
 
   const handleSelect = (id: number) => {
     onSelectTopic(id);
@@ -102,7 +103,7 @@ export const TableOfContentsModal: React.FC<TableOfContentsModalProps> = ({
             <Layers className="w-5 h-5 text-teal-800" />
             <div>
               <h3 className="text-base font-extrabold text-[#0F1E36]">
-                전체 15개 학습 주제 목차 (통합사회2)
+                전체 18개 학습 주제 목차 (통합사회2)
               </h3>
               <p className="text-xs text-[#0F1E36]/60">
                 원하는 주제를 클릭하여 즉시 해당 화면으로 이동합니다.
@@ -119,9 +120,10 @@ export const TableOfContentsModal: React.FC<TableOfContentsModalProps> = ({
 
         {/* Content */}
         <div className="p-6 overflow-y-auto flex-1">
-          {renderSection('PART 1. 자본주의의 의미와 특징', '개념과 본질적 지탱 기둥', part1Topics)}
-          {renderSection('PART 2. 자본주의의 역사적 전개', '상업 → 산업 → 수정 → 신자유주의와 위기 극복', part2Topics)}
-          {renderSection('PART 3. 종합 정리 및 복습', '종합 비교 매트릭스와 자본주의의 미래', part3Topics)}
+          {renderSection('PART 1. 자본주의의 의미와 특징', '개념과 본질적 지탱 기둥 (주제 01~02)', part1Topics)}
+          {renderSection('PART 2. 자본주의의 역사적 전개', '상업 → 산업 → 수정 → 신자유주의와 위기 극복 (주제 03~13)', part2Topics)}
+          {renderSection('PART 3. 경제 체제의 유형별 특징', '희소성과 3대 기본 경제 문제, 빵 부족 비교, 7대 기준 비교표 (주제 16~18)', part3Topics)}
+          {renderSection('PART 4. 종합 정리 및 복습', '종합 비교 매트릭스와 자본주의의 미래 (주제 14~15)', part4Topics)}
         </div>
       </div>
     </div>

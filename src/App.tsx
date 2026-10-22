@@ -22,10 +22,20 @@ import { Topic12NeoliberalismRise } from './components/topics/Topic12Neoliberali
 import { Topic13NeoliberalismEffectsAndLimits } from './components/topics/Topic13NeoliberalismEffectsAndLimits';
 import { Topic14ComparativeMatrix } from './components/topics/Topic14ComparativeMatrix';
 import { Topic15FinalSynthesis } from './components/topics/Topic15FinalSynthesis';
+import { Topic16WhatIsEconomicSystem } from './components/topics/Topic16WhatIsEconomicSystem';
+import { Topic17BreadShortageComparison } from './components/topics/Topic17BreadShortageComparison';
+import { Topic18EconomicSystemsComparison } from './components/topics/Topic18EconomicSystemsComparison';
+
+// Recommended Pedagogical Curriculum Sequence:
+// 1. Part 1: 자본주의의 의미와 특징 (주제 1, 2)
+// 2. Part 2: 자본주의의 역사적 전개 (주제 3 ~ 13)
+// 3. Part 3: 경제 체제의 유형별 특징 (주제 16, 17, 18)
+// 4. Part 4: 종합 정리 및 복습 (주제 14, 15)
+const TOPIC_SEQUENCE = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 16, 17, 18, 14, 15];
 
 export default function App() {
-  const [currentTopicId, setCurrentTopicId] = useState<number>(3); // Start directly on the flagship Timeline (Topic 03) or 1
-  const [activeStep, setActiveStep] = useState<number>(3); // Default reveal up to step 3 so teacher sees full power, can reset or step through
+  const [currentTopicId, setCurrentTopicId] = useState<number>(3); // Start directly on flagship Timeline (Topic 03)
+  const [activeStep, setActiveStep] = useState<number>(3); // Default reveal up to step 3
   const [isTeacherNotesOpen, setIsTeacherNotesOpen] = useState<boolean>(false);
   const [isTOCOpen, setIsTOCOpen] = useState<boolean>(false);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
@@ -55,16 +65,20 @@ export default function App() {
   const currentTopic: TopicItem =
     CURRICULUM_TOPICS.find((t) => t.id === currentTopicId) || CURRICULUM_TOPICS[0];
 
+  const currentSequenceIndex = TOPIC_SEQUENCE.indexOf(currentTopicId);
+
   const handlePrevTopic = useCallback(() => {
-    if (currentTopicId > 1) {
-      setCurrentTopicId((prev) => prev - 1);
+    const idx = TOPIC_SEQUENCE.indexOf(currentTopicId);
+    if (idx > 0) {
+      setCurrentTopicId(TOPIC_SEQUENCE[idx - 1]);
       setActiveStep(3); // Reset to full reveal on slide switch
     }
   }, [currentTopicId]);
 
   const handleNextTopic = useCallback(() => {
-    if (currentTopicId < CURRICULUM_TOPICS.length) {
-      setCurrentTopicId((prev) => prev + 1);
+    const idx = TOPIC_SEQUENCE.indexOf(currentTopicId);
+    if (idx !== -1 && idx < TOPIC_SEQUENCE.length - 1) {
+      setCurrentTopicId(TOPIC_SEQUENCE[idx + 1]);
       setActiveStep(3);
     }
   }, [currentTopicId]);
@@ -72,7 +86,8 @@ export default function App() {
   const handleSelectPart = (partId: PartId) => {
     if (partId === 'part1') setCurrentTopicId(1);
     else if (partId === 'part2') setCurrentTopicId(3);
-    else if (partId === 'part3') setCurrentTopicId(14);
+    else if (partId === 'part3') setCurrentTopicId(16);
+    else if (partId === 'part4') setCurrentTopicId(14);
     setActiveStep(3);
   };
 
@@ -158,6 +173,12 @@ export default function App() {
         return <Topic14ComparativeMatrix activeStep={activeStep} />;
       case 15:
         return <Topic15FinalSynthesis activeStep={activeStep} />;
+      case 16:
+        return <Topic16WhatIsEconomicSystem activeStep={activeStep} />;
+      case 17:
+        return <Topic17BreadShortageComparison activeStep={activeStep} />;
+      case 18:
+        return <Topic18EconomicSystemsComparison activeStep={activeStep} />;
       default:
         return <Topic03MasterTimeline activeStep={activeStep} />;
     }
@@ -198,6 +219,9 @@ export default function App() {
         onSelectStep={(step) => setActiveStep(step)}
         onRevealAllSteps={() => setActiveStep(currentTopic.steps.length)}
         onResetSteps={() => setActiveStep(1)}
+        canPrev={currentSequenceIndex > 0}
+        canNext={currentSequenceIndex !== -1 && currentSequenceIndex < TOPIC_SEQUENCE.length - 1}
+        topicNumberDisplay={currentTopic.chapterNumberStr}
       />
 
       {/* Teacher Lecture Note Drawer */}

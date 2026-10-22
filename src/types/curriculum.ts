@@ -1,4 +1,4 @@
-export type PartId = 'part1' | 'part2' | 'part3';
+export type PartId = 'part1' | 'part2' | 'part3' | 'part4';
 
 export interface CurriculumStep {
   stepNumber: number;

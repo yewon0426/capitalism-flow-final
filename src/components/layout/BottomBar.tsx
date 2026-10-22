@@ -12,6 +12,9 @@ interface BottomBarProps {
   onSelectStep: (stepNumber: number) => void;
   onRevealAllSteps: () => void;
   onResetSteps: () => void;
+  canPrev?: boolean;
+  canNext?: boolean;
+  topicNumberDisplay?: string;
 }
 
 export const BottomBar: React.FC<BottomBarProps> = ({
@@ -23,7 +26,10 @@ export const BottomBar: React.FC<BottomBarProps> = ({
   activeStep,
   onSelectStep,
   onRevealAllSteps,
-  onResetSteps
+  onResetSteps,
+  canPrev,
+  canNext,
+  topicNumberDisplay
 }) => {
   return (
     <footer className="h-16 px-6 bg-[#F8F6F0] border-t border-[#0F1E36]/10 flex items-center justify-between gap-4 select-none shrink-0 z-30">
@@ -31,7 +37,7 @@ export const BottomBar: React.FC<BottomBarProps> = ({
       <div className="flex items-center gap-2">
         <button
           onClick={onPrevTopic}
-          disabled={currentTopicId <= 1}
+          disabled={canPrev !== undefined ? !canPrev : currentTopicId <= 1}
           className="flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-[#0F1E36] bg-white border border-[#0F1E36]/15 rounded-md hover:bg-[#F0EDE3] disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer shadow-xs"
           title="이전 학습 주제 (Left Arrow)"
         >
@@ -40,14 +46,14 @@ export const BottomBar: React.FC<BottomBarProps> = ({
         </button>
 
         <div className="px-3 py-1 bg-white border border-[#0F1E36]/15 rounded-md text-xs font-mono font-bold text-[#0F1E36] shadow-xs">
-          <span className="text-teal-800">{String(currentTopicId).padStart(2, '0')}</span>
+          <span className="text-teal-800">{topicNumberDisplay || String(currentTopicId).padStart(2, '0')}</span>
           <span className="text-[#0F1E36]/30 mx-1.5">/</span>
           <span>{String(totalTopics).padStart(2, '0')}</span>
         </div>
 
         <button
           onClick={onNextTopic}
-          disabled={currentTopicId >= totalTopics}
+          disabled={canNext !== undefined ? !canNext : currentTopicId >= totalTopics}
           className="flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-[#0F1E36] bg-white border border-[#0F1E36]/15 rounded-md hover:bg-[#F0EDE3] disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer shadow-xs"
           title="다음 학습 주제 (Right Arrow)"
         >

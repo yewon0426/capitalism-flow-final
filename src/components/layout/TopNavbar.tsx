@@ -54,7 +54,7 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({
       </div>
 
       {/* Zone 2: Clean single-line navigation links to sections */}
-      <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-[#0F1E36]/70">
+      <nav className="hidden md:flex items-center gap-5 text-sm font-medium text-[#0F1E36]/70">
         <button
           onClick={() => onSelectPart('part1')}
           className={`cursor-pointer pb-0.5 transition-colors whitespace-nowrap shrink-0 ${
@@ -73,7 +73,7 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({
               : 'hover:text-[#0F1E36]'
           }`}
         >
-          2. 역사적 전개 과정
+          2. 역사적 전개
         </button>
         <button
           onClick={() => onSelectPart('part3')}
@@ -83,14 +83,24 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({
               : 'hover:text-[#0F1E36]'
           }`}
         >
-          3. 종합 정리 및 복습
+          3. 경제 체제의 유형
+        </button>
+        <button
+          onClick={() => onSelectPart('part4')}
+          className={`cursor-pointer pb-0.5 transition-colors whitespace-nowrap shrink-0 ${
+            currentPartId === 'part4'
+              ? 'text-teal-800 font-bold border-b-2 border-teal-700'
+              : 'hover:text-[#0F1E36]'
+          }`}
+        >
+          4. 종합 정리·복습
         </button>
         <button
           onClick={onOpenTOC}
-          className="flex items-center gap-1.5 hover:text-teal-800 transition-colors cursor-pointer whitespace-nowrap shrink-0"
+          className="flex items-center gap-1.5 hover:text-teal-800 transition-colors cursor-pointer whitespace-nowrap shrink-0 ml-1 text-xs font-bold text-teal-800 bg-teal-50 px-2 py-1 rounded border border-teal-200"
         >
-          <ListOrdered className="w-4 h-4" />
-          <span>전체 15개 목차</span>
+          <ListOrdered className="w-3.5 h-3.5" />
+          <span>전체 18개 목차</span>
         </button>
       </nav>
 
